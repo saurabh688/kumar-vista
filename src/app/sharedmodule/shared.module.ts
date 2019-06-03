@@ -65,4 +65,4 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginatorModule
   ]
 })
-export class SharedmoduleModule { }
+export class SharedModule { }

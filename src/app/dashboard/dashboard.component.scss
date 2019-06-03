@@ -1,0 +1,54 @@
+.dashboard_outline {
+    margin: 0px !important;
+    padding: 0px;
+    width: 99%;
+
+    .header1 {
+        font-size: 18px;
+        font-weight: bolder;
+        color: #25364f;
+    }
+
+    .btn_style {
+        background-color: #849abb;
+        color: white;
+        display: inline;
+        width: 186px;
+        float: right;    
+    }
+    .btn_style1 {
+        background-color: #849abb;
+        color: white;
+        display: inline;
+        width: 186px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+
+      .table_position {
+          padding-bottom: 30px;
+      }
+
+      .newProjectLayout{
+          padding-bottom: 70px;
+      }
+
+
+      .btn_spacing{
+          padding-bottom: 30px;
+      }
+}

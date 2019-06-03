@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../sharedmodule/shared.module';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
 
 const routes: Routes = [
-  {path: '', component: LoginComponent}
+  {path: '', component: DashboardComponent}
 ];
 
 @NgModule({
   declarations: [
-    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule,
-    MatFormFieldModule
+    SharedModule
   ]
 })
-export class LoginModule { }
+export class DashboardModule { }
