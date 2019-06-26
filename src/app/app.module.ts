@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from './layout/layout.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { LayoutModule } from './layout/layout.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
-    LayoutModule
+    LayoutModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

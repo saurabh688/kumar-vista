@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, ValidatorFn, FormGroupDirective, NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, public router: Router) {
+  constructor(private fb: FormBuilder, public router: Router,private licApiService: AppService) {
     this.loginFormGroup = this.fb.group({
       'username': [null],
       'password': [null]
@@ -32,6 +33,21 @@ export class LoginComponent implements OnInit {
         alert('Invalid Credentials');
       }
     }
+
+    var retrivedDataForSection211a = {
+      "tableName": "coursefirstyearadmission",
+      "moduleName": "coursefirstyearadmission",
+      "moduleInfo": "retrivedDataForSection211a",
+      "retrieveKey": { "existingCourseDetailsId": 15 }
+    };
+
+    this.licApiService.retrieveByKey(retrivedDataForSection211a).subscribe(
+      (res) => {
+console.log('existing    '+JSON.stringify(res));
+      })
+
+
+
   }
 
 }
