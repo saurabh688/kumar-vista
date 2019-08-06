@@ -33,21 +33,6 @@ export class LoginComponent implements OnInit {
         alert('Invalid Credentials');
       }
     }
-
-    var retrivedDataForSection211a = {
-      "tableName": "coursefirstyearadmission",
-      "moduleName": "coursefirstyearadmission",
-      "moduleInfo": "retrivedDataForSection211a",
-      "retrieveKey": { "existingCourseDetailsId": 15 }
-    };
-
-    this.licApiService.retrieveByKey(retrivedDataForSection211a).subscribe(
-      (res) => {
-console.log('existing    '+JSON.stringify(res));
-      })
-
-
-
   }
 
 }

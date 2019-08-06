@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-project-details',
@@ -9,14 +10,18 @@ import { Router } from '@angular/router';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-  allFlatData = [{ flatNumber: '1001', buyerName: 'Ram', dateOfBooking: '20/05/2020' },
-  { flatNumber: '1001', buyerName: 'Ram', dateOfBooking: '20/05/2020' },
-  { flatNumber: '1001', buyerName: 'Ram', dateOfBooking: '20/05/2020' }];
+  projectId;
+  allFlatData = [];
 
   addFlatFormGroup: FormGroup;
   addFlatFlag = false;
-  constructor(private fb: FormBuilder, public router: Router) {
+  constructor(private fb: FormBuilder, public router: Router,
+    private activatedRoute: ActivatedRoute, public appService: AppService) {
+    let param = activatedRoute.snapshot.params['projectId'];
+    this.projectId = JSON.parse(window.atob(param));
+
     this.addFlatFormGroup = this.fb.group({
+      'projectId': [null],
       'flatNumber': [null],
       'buyerName': [null],
       'dateOfBooking': [null],
@@ -25,18 +30,41 @@ export class ProjectDetailsComponent implements OnInit {
       'registrationCost': [null],
       'maintenanceCost': [null],
       'otherCost': [null],
-      'remaks': [null]
-    })
+      'totalCost': [null],
+      'remarks': [null]
+    });
+
+    this.retriveFlatDetails();
   }
 
 
   ngOnInit() {
   }
 
+  retriveFlatDetails() {
+    this.allFlatData = [];
+    var data = {
+      "tableName": "flatdetails",
+      "moduleName": "ProjectDetailsComponent",
+      "moduleInfo": "retriveFlatDetails",
+      "retrieveKey": { "projectId": this.projectId }
+    }
+
+    this.appService.retrieveByKey(data).subscribe((res) => {
+      console.log('resp' + JSON.stringify(res));
+      if (res.data.length > 0) {
+        this.allFlatData = res.data;
+      }
+    })
+
+  }
+
   getTotalCost() {
-    return (this.addFlatFormGroup.value.basicCost + this.addFlatFormGroup.value.gst +
+    this.addFlatFormGroup.controls['totalCost'].setValue((this.addFlatFormGroup.value.basicCost + this.addFlatFormGroup.value.gst +
       this.addFlatFormGroup.value.registrationCost + this.addFlatFormGroup.value.maintenanceCost +
-      this.addFlatFormGroup.value.otherCost);
+      this.addFlatFormGroup.value.otherCost));
+
+    return this.addFlatFormGroup.controls['totalCost'].value;
   }
 
   showFlatModel() {
@@ -45,16 +73,32 @@ export class ProjectDetailsComponent implements OnInit {
 
   addNewFlat(data) {
     if (data == 'add') {
-      this.addFlatFlag = false;
+      this.addFlatFormGroup.controls['projectId'].setValue(this.projectId);
+      let data = {
+        "tableName": 'flatdetails',
+        "moduleName": 'addNewFlat',
+        "moduleInfo": 'ProjectDetailsComponent',
+        "createData": [Object.assign(this.addFlatFormGroup.value,
+          {
+            "updatedBy": "saurabh",
+            "createdBy": "saurabh"
+          })
+        ]
+      };
+      this.appService.createData(data).subscribe((res) => {
+        this.retriveFlatDetails();
+        this.addFlatFlag = false;
+      })
     }
     if (data == 'cancel') {
       this.addFlatFlag = false;
     }
   }
 
-  viewFlatDetails(index) {
-    this.router.navigate(['dashboard/flatDetails']);
-
+  viewFlatDetails(data) {
+    console.log('dataaa' + JSON.stringify(data));
+    var projectId = window.btoa(data.projectId);
+    var flatId = window.btoa(data.id);
+    this.router.navigate(['dashboard/flatDetails/' + projectId + '/' + flatId]);
   }
-
 }

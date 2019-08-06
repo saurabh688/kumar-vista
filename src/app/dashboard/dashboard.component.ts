@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AppService } from '../app.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +10,13 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  allProjectsData = [{ name: 'Kumar Vista', startDate: '20/05/2019', completionDate: '20/05/2020' }];
+  allProjectsData = [];
   newProjectFormGroup: FormGroup;
   showAddProjectDashboard = false;
-  constructor(private fb: FormBuilder, public router: Router) {
+  constructor(private fb: FormBuilder, public router: Router, public appService: AppService,
+    private http: HttpClient) {
     this.newProjectFormGroup = this.fb.group({
-      'newProjectName': [null],
+      'projectName': [null],
       'startDate': [null],
       'completionDate': [null]
     })
@@ -22,6 +24,14 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.retreiveAllProjects();
+  }
+  retreiveAllProjects() {
+    var data = { "tableName": "projectlist" };
+    this.appService.retrieveAll(data).subscribe((res) => {
+      console.log("output  " + JSON.stringify(res));
+      this.allProjectsData = res;
+    })
   }
 
   showAddProjectModel() {
@@ -30,15 +40,31 @@ export class DashboardComponent implements OnInit {
 
   addNewProject(data) {
     if (data == 'add') {
-      this.showAddProjectDashboard = false;
+      console.log('data ' + JSON.stringify(this.newProjectFormGroup.value));
+      let data = {
+        "tableName": 'projectlist',
+        "moduleName": 'dashboard',
+        "moduleInfo": 'addNewProject',
+        "createData": [Object.assign(this.newProjectFormGroup.value,
+          {
+            "updatedBy": "saurabh",
+            "createdBy": "saurabh"
+          })
+        ]
+      };
+      this.appService.createData(data).subscribe((res) => {
+        console.log("output  " + res);
+        this.showAddProjectDashboard = false;
+      })
     }
     if (data == 'cancel') {
       this.showAddProjectDashboard = false;
     }
   }
 
-  projectDetails(index) {
-    this.router.navigate(['dashboard/projectDetails']);
+  projectDetails(data) {
+    var param=window.btoa((data.id));
+    this.router.navigate(['dashboard/projectDetails',param]);
   }
 
 }

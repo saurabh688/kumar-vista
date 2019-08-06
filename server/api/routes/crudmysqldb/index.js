@@ -21,32 +21,31 @@ router
   .post(ctrlMySqlCrud.retrieveByKey);
 
 router
+  .route('/retrieveByCondition')
+  .post(ctrlMySqlCrud.retrieveByCondition);
+
+router
+  .route('/retrieveByMultipleCondition')
+  .post(ctrlMySqlCrud.retrieveByMultipleCondition);
+
+router
+  .route('/retrieveByMultipleConditionDistinct')
+  .post(ctrlMySqlCrud.retrieveByMultipleConditionDistinct);
+
+router
   .route('/updateData')
   .post(ctrlMySqlCrud.updateData);
+
+router
+  .route('/updateDataByMultipleCondition')
+  .post(ctrlMySqlCrud.updateDataByMultipleCondition);
 
 router
   .route('/deleteData')
   .post(ctrlMySqlCrud.deleteData);
 
 router
-  .route('/retrieveByMultipleCondition')
-  .post(ctrlMySqlCrud.retrieveByMultipleCondition);
-  
-  router
-  .route('/retrieveByMultipleConditionDistinct')
-  .post(ctrlMySqlCrud.retrieveByMultipleConditionDistinct);
-
-  router
-  .route('/updateDataByMultipleCondition')
-  .post(ctrlMySqlCrud.updateDataByMultipleCondition);
-
-  
-router
-  .route('/retrieveByCondition')
-  .post(ctrlMySqlCrud.retrieveByCondition);
-
-router
-   .route('/deleteByMultipleCondition')
-   .post(ctrlMySqlCrud.deleteByMultipleCondition);
+  .route('/deleteByMultipleCondition')
+  .post(ctrlMySqlCrud.deleteByMultipleCondition);
 
 module.exports = router;

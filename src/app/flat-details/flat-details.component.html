@@ -1,9 +1,10 @@
 <div class="flat_details_layout">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-xs-12">
-      <button class="btn_style" mat-button (click)="print()">Print</button>
+      <button class="btn_style" mat-button (click)="print('printableContent')">Print</button>
     </div>
   </div>
+  <div id="printableContent">
   <div class="row row_spacing">
     <div class="col-lg-12 col-md-12 col-xs-12">
       <span class="header">{{'Kumar Vista'}}</span>
@@ -12,18 +13,18 @@
 
   <div class="row row_spacing basicDetails">
     <div class="col-lg-4 col-md-4 col-xs-4">
-      <label>Flat Number:</label>&nbsp;&nbsp;<span>{{'101'}}</span>
+      <label>Flat Number:</label>&nbsp;&nbsp;<span>{{generalInfo?.flatNumber}}</span>
     </div>
     <div class="col-lg-4 col-md-4 col-xs-4">
-      <label>Buyer Name:</label>&nbsp;&nbsp;<span>{{'Ram'}}</span>
+      <label>Buyer Name:</label>&nbsp;&nbsp;<span>{{generalInfo?.buyerName}}</span>
     </div>
     <div class="col-lg-4 col-md-4 col-xs-4">
-      <label>Date of Booking:</label>&nbsp;&nbsp;<span>{{'20/05/2019'}}</span>
+      <label>Date of Booking:</label>&nbsp;&nbsp;<span>{{generalInfo?.dateOfBooking}}</span>
     </div>
   </div>
   <div class="row row_spacing basicDetails">
     <div class="col-lg-12 col-md-12 col-xs-12">
-      <label>Total Cost:</label>&nbsp;&nbsp;<span>{{'1010000'}}&nbsp;&nbsp;</span><span class="style1">(Basic Cost + GST
+      <label>Total Cost:</label>&nbsp;&nbsp;<span>{{generalInfo?.totalCost}}&nbsp;&nbsp;</span><span class="style1">(Basic Cost + GST
         + Maintenance Cost + Other Cost)</span>
     </div>
   </div>
@@ -41,50 +42,50 @@
         <button class="btn_style" mat-button (click)="editList = ''">Edit</button>
       </div>
     </div>
-
+<div *ngIf="detailsList.length>0">
     <div *ngFor="let item of detailsList; let i=index" [ngClass]="editList">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
-          <button class="btn_style2" mat-button (click)="deleteItem(i)">Delete</button>
+          <button class="btn_style2" mat-button (click)="deleteItem(item,i)">Delete</button>
         </div>
       </div>
       <div class="row row_spacing">
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Name :</label>&nbsp;&nbsp;
-          <input type="text" [value]="item.name" class="form-control" />
+          <input type="text" [(ngModel)]="item.buyerName" class="form-control" />
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Mode :</label>&nbsp;&nbsp;
-          <select type="select" [value]="item.mode" class="form-control">
+          <select type="select" [(ngModel)]="item.paymentMode" class="form-control">
             <option value="">{{'Select'}}</option>
             <option *ngFor="let option of modeList" [value]="option.value">{{option.name}}</option>
           </select>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Date :</label>&nbsp;&nbsp;
-          <input [type]="dateType" class="form-control" [value]="item.receivedDate" (focus)="changeDateType()" />
+          <input [type]="dateType" title="check received" class="form-control" [(ngModel)]="item.checkReceivedDate" (focus)="changeDateType()" />
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Amount :</label>&nbsp;&nbsp;
-          <input type="text" [value]="item.amount" class="form-control" />
+          <input type="text" [(ngModel)]="item.amount" class="form-control" />
         </div>
       </div>
-      <div *ngIf="item.mode == 'check'" class="row row_spacing">
+      <div *ngIf="item.paymentMode == 'check'" class="row row_spacing">
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Check Number :</label>&nbsp;&nbsp;
-          <input type="text" [value]="item.checkNo" class="form-control" />
+          <input type="text" [(ngModel)]="item.checkNumber" class="form-control" />
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Check Date :</label>&nbsp;&nbsp;
-          <input type="text" [value]="item.checkDate" class="form-control" />
+          <input type="text"  [(ngModel)]="item.checkDate" class="form-control" />
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Bank Name :</label>&nbsp;&nbsp;
-          <input type="text" [value]="item.bankName" class="form-control" />
+          <input type="text" [(ngModel)]="item.bankName" class="form-control" />
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3">
           <label>Deposited Bank Name :</label>&nbsp;&nbsp;
-          <input type="text" [value]="item.depositedBankName" class="form-control" />
+          <input type="text" [(ngModel)]="item.depositedBankName" class="form-control" />
         </div>
       </div>
       <div *ngIf="detailsList.length>1">
@@ -92,6 +93,7 @@
       </div>
 
     </div>
+</div>
 
     <div class="row">
       <div class="col-lg-12 col-md-12 col-xs-12">
@@ -118,5 +120,5 @@
       <span class="style2">Promoter Sign</span>  <span class="style2 float_right">Buyer Sign</span>
     </div>
   </div>
-
+</div>
 </div>

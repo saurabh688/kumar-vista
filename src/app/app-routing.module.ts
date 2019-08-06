@@ -8,8 +8,8 @@ const routes: Routes = [
   {
     path: 'dashboard', component: LayoutComponent, children: [
       { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-      { path: 'projectDetails', loadChildren: './project-details/project-details.module#ProjectDetailsModule' },
-      { path: 'flatDetails', loadChildren: './flat-details/flat-details.module#FlatDetailsModule' },
+      { path: 'projectDetails/:projectId', loadChildren: './project-details/project-details.module#ProjectDetailsModule' },
+      { path: 'flatDetails/:projectId/:flatId', loadChildren: './flat-details/flat-details.module#FlatDetailsModule' },
 
     ]
   }
