@@ -53,7 +53,8 @@ export class DashboardComponent implements OnInit {
         ]
       };
       this.appService.createData(data).subscribe((res) => {
-        console.log("output  " + res);
+        this.retreiveAllProjects();
+        console.log("output  " +JSON.stringify( res));
         this.showAddProjectDashboard = false;
       })
     }
@@ -63,7 +64,9 @@ export class DashboardComponent implements OnInit {
   }
 
   projectDetails(data) {
+    console.log('data',data)
     var param=window.btoa((data.id));
+    console.log('dataid',data.id)
     this.router.navigate(['dashboard/projectDetails',param]);
   }
 

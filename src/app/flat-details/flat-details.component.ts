@@ -126,4 +126,17 @@ export class FlatDetailsComponent implements OnInit {
 
   }
 
+  getAmountPaid(){
+    let totalAmountPaid = 0;
+    this.detailsList.forEach(item=>{
+      console.log('tieee',item.amount)
+      totalAmountPaid = Number(totalAmountPaid+item.amount);
+    })
+    return totalAmountPaid;
+  }
+
+  getDueAmount(){
+    return Number(this.generalInfo.totalCost-this.getAmountPaid());
+  }
+
 }

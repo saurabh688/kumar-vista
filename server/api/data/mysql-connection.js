@@ -7,7 +7,7 @@ var knex = require('knex')({
     connection: {
       host : '127.0.0.1',
       user : 'root',
-      password : 'test123',
+      password : '1234',
       database : 'kumar_vista'
     }
   });

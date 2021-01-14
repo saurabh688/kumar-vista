@@ -18,7 +18,7 @@
 
         <div class="col-lg-4 col-md-4 col-xs-4">
           <mat-form-field>
-            <input matInput type="date" placeholder="Start Date" formControlName="startDate" required>
+            <input matInput type="date"  placeholder="Start Date" formControlName="startDate" required>
             <mat-error>{{'Invalid Start Date'}}</mat-error>
           </mat-form-field>
       </div>
@@ -50,7 +50,7 @@
           <th>Start Date</th>
           <th>Completion Date</th>
         </tr>
-        <tr *ngFor="let item of allProjectsData; let i=index" (click)="projectDetails(item)">
+        <tr *ngFor="let item of allProjectsData; let i=index" style="cursor: pointer;" (click)="projectDetails(item)">
           <td>{{i+1}}</td>
           <td>{{item.projectName}}</td>
           <td>{{item.startDate}}</td>
