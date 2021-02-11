@@ -1,7 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', loadChildren: './login/login.module#LoginModule' },
+  {
+    path: 'dashboard', component: LayoutComponent, children: [
+      { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+      { path: 'projectDetails/:projectId', loadChildren: './project-details/project-details.module#ProjectDetailsModule' },
+      { path: 'flatDetails/:projectId/:flatId', loadChildren: './flat-details/flat-details.module#FlatDetailsModule' },
+
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

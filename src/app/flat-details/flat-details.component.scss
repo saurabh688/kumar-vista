@@ -1,0 +1,82 @@
+.flat_details_layout {
+    margin: 0px !important;
+    padding: 0px;
+    width: 99%;
+
+    .header {
+        font-size: 22px;
+        font-weight: bolder;
+        color: #000000;
+    }
+    .style2 {
+        font-size: 16px;
+        font-weight: bolder;
+        color: #000000;
+    }
+    .header1 {
+        font-size: 20px;
+        font-weight: bolder;
+        color: #000000;
+    }
+
+    .btn_style {
+        background-color: #849abb;
+        color: white;
+        display: inline;
+        width: 100px;
+        float: right;
+    }
+    .btn_style2 {
+        background-color: #849abb;
+        color: white;
+        display: inline;
+        width: 100px;
+    }
+
+    .row_spacing {
+        padding-bottom: 20px;
+    }
+
+    .basicDetails {
+        label {
+            font-size: 14px;
+            font-weight: normal;
+            color: #000000;
+        }
+
+        span {
+            font-size: 18px;
+            font-weight: bolder;
+            color: #000000;
+        }
+
+        .style1{
+            font-size: 14px !important;
+            font-weight: normal !important;
+            color: #000000 !important;
+        }
+    }
+
+    .details_layout{
+        border: 1px solid #849abb;
+        padding: 30px;
+        box-shadow: 5px 5px #849abb;
+    }
+
+    .view{
+        pointer-events: none;
+    }
+
+    .style3 {
+        font-size: 18px;
+        font-weight: bolder;
+        color: #000000;    }
+
+    .signPosition{
+        padding:150px 30px 40px 30px;
+    }
+
+    .float_right {
+        float: right;
+    }
+}
