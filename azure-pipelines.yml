@@ -1,4 +1,9 @@
 # Node.js with Angular
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'dist'
+    artifact: 'devapp'
+    publishLocation: 'pipeline'
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
