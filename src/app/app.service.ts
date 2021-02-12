@@ -16,7 +16,7 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   createData(data): Observable<any> {
-    return this.http.post('https://troxserver.azurewebsites.net/api/mysqlDb/createData', data).pipe(response => {
+    return this.http.post('http://troxserver.azurewebsites.net/api/mysqlDb/createData', data).pipe(response => {
       return response;
     });
 
