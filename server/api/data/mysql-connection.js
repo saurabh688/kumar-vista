@@ -5,9 +5,9 @@ Change this respective connection in the server for each connection
 var knex = require('knex')({
     client: 'mysql',
     connection: {
-      host : '127.0.0.1',
-      user : 'root',
-      password : '1234',
+      host : 'troxdb.mysql.database.azure.com',
+      user : 'troxdb@troxdb',
+      password : 'Qwerty@12345',
       database : 'kumar_vista'
     }
   });
